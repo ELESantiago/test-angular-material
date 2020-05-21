@@ -1,11 +1,11 @@
 <mat-form-field>
   <mat-label>Hide Column</mat-label>
-  <mat-select (selectionChange)="hideColumn($event)">
+  <mat-select (selectionChange)="hideColumn($event.value)">
     <mat-option >
       None
     </mat-option>
-    <mat-option *ngFor="let col of displayedColumns" [value]="col">
-      {{col}}
+    <mat-option *ngFor="let col of columnsICanHide" [value]="col.id">
+      {{col.name}}
     </mat-option>
   </mat-select>
 </mat-form-field>

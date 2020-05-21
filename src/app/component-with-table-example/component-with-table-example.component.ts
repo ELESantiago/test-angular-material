@@ -29,6 +29,7 @@ export class ComponentWithTableExampleComponent implements OnInit {
     { id: 3, name: 'Robert 3', year: 2020},
     { id: 4, name: 'Robert 5', year: 2018},
   ];
+  columnsICanHide = [{id: 'name', name: 'Name' }, { id: 'weight', name: 'Weight' }, { id: 'year', name: 'Year' }];
 
   constructor(
     //private service: Service
@@ -37,13 +38,14 @@ export class ComponentWithTableExampleComponent implements OnInit {
   ngOnInit() {
   }
 
-  hideColumn(columnToHide) {
+  hideColumn(columnToShow) {
     const copyOfColumns = this.displayedColumns.slice();
-    if (!columnToHide.value) {
+    if (!columnToShow) {
       this.columnsToDisplay = copyOfColumns;
       return;
     }
-    this.columnsToDisplay = copyOfColumns.filter(col => col !== columnToHide.value);
+    const columnsToHide = this.columnsICanHide.filter(col => col.id !== columnToShow).map(col => col.id);
+    this.columnsToDisplay = copyOfColumns.filter(col => !columnsToHide.includes(col));
   }
 
   onRefreshButtonClick() {
